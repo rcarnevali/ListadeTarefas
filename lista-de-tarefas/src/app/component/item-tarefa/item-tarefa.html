@@ -1,0 +1,73 @@
+<div class="pagina" [class.modo-escuro]="modoEscuro">
+  <div class="lista-tarefas">
+
+    <div class="ornamento-topo">
+      <span class="linha-decorativa"></span>
+      <span class="estrelas">✦ ✦ ✦</span>
+      <span class="linha-decorativa"></span>
+    </div>
+
+<div class="cabecalho">
+  <h1>Lista de tarefas</h1>
+
+  <div class="controle-tema">
+  <label class="toggle">
+    <input type="checkbox" [(ngModel)]="modoEscuro">
+    <span class="toggle-ui"></span>
+  </label>
+
+  <span>🌙</span>
+</div>
+</div>
+
+    <div class="nova-tarefa">
+      <input
+        type="text"
+        placeholder="Nova tarefa..."
+        [(ngModel)]="novaTarefa"
+      >
+
+      <button
+            class="botao-adicionar"
+            (click)="adicionarTarefa()"
+        >
+        Adicionar
+      </button>
+    </div>
+
+    <div
+      class="tarefa"
+      *ngFor="let tarefa of tarefaService.tarefas; let i = index"
+    >
+
+      <input
+        type="checkbox"
+        [(ngModel)]="tarefa.concluida"
+      >
+
+      <span [class.concluida]="tarefa.concluida">
+        {{ tarefa.titulo }}
+      </span>
+
+      <button
+        class="botao-remover"
+        (click)="removerTarefa(i)"
+        >
+        Remover
+     </button>
+
+    </div>
+        <div class="resumo">
+
+        <div class="resumo-item">
+            <span>Total de tarefas: </span>
+            <strong>{{ tarefaService.tarefas.length }}</strong>
+        </div>
+
+        <div class="resumo-item">
+            <span>Tarefas concluídas: </span>
+            <strong>{{ tarefaService.contarConcluidas() }}</strong>
+        </div>
+    </div>
+  </div>
+</div>
